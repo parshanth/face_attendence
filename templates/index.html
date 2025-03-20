@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Face Attendance Dashboard</title>
+  <style>
+    /* Reset styles */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    /* Full-page layout */
+    body {
+      font-family: Arial, sans-serif;
+      height: 100vh;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      background: radial-gradient(circle, rgba(95,0,168,1) 20%, rgba(40,0,77,1) 80%);
+      position: relative;
+    }
+
+    /* Glowing effect in background */
+    body::before {
+      content: "";
+      position: absolute;
+      width: 500px;
+      height: 500px;
+      background: rgba(255, 255, 255, 0.1);
+      filter: blur(100px);
+      border-radius: 50%;
+      top: 20%;
+      left: 10%;
+    }
+
+    body::after {
+      content: "";
+      position: absolute;
+      width: 400px;
+      height: 400px;
+      background: rgba(255, 255, 255, 0.1);
+      filter: blur(120px);
+      border-radius: 50%;
+      bottom: 15%;
+      right: 15%;
+    }
+
+    /* Fixed header with white separator */
+    header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      background: rgba(45, 0, 85, 0.9);
+      color: white;
+      padding: 20px 0;
+      text-align: center;
+      font-size: 24px;
+      font-weight: bold;
+      border-bottom: 2px solid white;
+    }
+
+    /* Center container */
+    .container {
+      text-align: center;
+      width: 100%;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+
+    /* Navigation links */
+    ul {
+      list-style: none;
+      padding: 20px 0;
+    }
+
+    li {
+      display: inline;
+      margin: 0 15px;
+    }
+
+    a {
+      text-decoration: none;
+      color: white;
+      background: linear-gradient(45deg, #6d00cc, #8a2be2);
+      padding: 12px 18px;
+      border-radius: 8px;
+      font-size: 18px;
+      font-weight: bold;
+      transition: 0.3s;
+      box-shadow: 0px 0px 8px rgba(138, 43, 226, 0.6);
+    }
+
+    a:hover {
+      background: linear-gradient(45deg, #8a2be2, #6d00cc);
+      box-shadow: 0px 0px 15px rgba(138, 43, 226, 1);
+    }
+
+    /* Button styles */
+    .button-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-top: 30px;
+    }
+
+    .run-button {
+      background: linear-gradient(45deg, #00ff88, #007744);
+      color: white;
+      border: none;
+      padding: 20px 40px;
+      font-size: 22px;
+      cursor: pointer;
+      margin-bottom: 20px;
+      border-radius: 10px;
+      transition: 0.3s;
+      box-shadow: 0px 0px 10px rgba(0, 255, 136, 0.6);
+    }
+
+    .run-button:hover {
+      background: linear-gradient(45deg, #007744, #00ff88);
+      box-shadow: 0px 0px 20px rgba(0, 255, 136, 1);
+    }
+
+    .download-button {
+      background: linear-gradient(45deg, #ffcc00, #ff9900);
+      color: black;
+      padding: 14px 25px;
+      font-size: 18px;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: 0.3s;
+      box-shadow: 0px 0px 10px rgba(255, 204, 0, 0.6);
+    }
+
+    .download-button:hover {
+      background: linear-gradient(45deg, #ff9900, #ffcc00);
+      box-shadow: 0px 0px 20px rgba(255, 204, 0, 1);
+    }
+
+  </style>
+
+  <script>
+    function startFinalMain() {
+      fetch("/run_final", { method: "POST" })
+        .then(response => response.text())
+        .then(data => alert(data));
+    }
+  </script>
+
+</head>
+<body>
+
+  <header>Face Attendance Dashboard</header>
+
+  <div class="container">
+    <ul>
+      <li><a href="/images">View Known Images</a></li>
+      <li><a href="/snapshots">View Snapshots</a></li>
+      <li><a href="/attendance">View Attendance Records</a></li>
+    </ul>
+
+    <div class="button-container">
+      <button class="run-button" onclick="startFinalMain()">Run Final Main</button>
+      <a href="/download_excel" download>
+        <button class="download-button">Download Attendance Excel</button>
+      </a>
+    </div>
+  </div>
+
+</body>
+</html>

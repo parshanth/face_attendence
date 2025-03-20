@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>File Listing</title>
+  <style>
+    .image-container {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+    .image-container img {
+      max-width: 300px;
+      max-height: 300px;
+      border: 1px solid #ccc;
+      padding: 5px;
+    }
+    ul.file-list {
+      list-style: none;
+      padding: 0;
+    }
+    ul.file-list li {
+      margin: 5px 0;
+    }
+  </style>
+</head>
+<body>
+  <h1>Files in <span>{{ folder }}</span></h1>
+  {% if folder == "images" %}
+  <div class="image-container">
+    {% for file in files %}
+      <div>
+        <img src="/{{ folder }}/{{ file }}" alt="Image">
+      </div>
+    {% endfor %}
+  </div>
+  {% else %}
+  <ul class="file-list">
+    {% for file in files %}
+      <li><a href="/{{ folder }}/{{ file }}">{{ file }}</a></li>
+    {% endfor %}
+  </ul>
+  {% endif %}
+  <br>
+  <a href="/">Back to Home</a>
+</body>
+</html>

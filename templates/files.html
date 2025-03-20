@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Image Listing</title>
+  <style>
+    /* Reset styles */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    /* Full-page layout */
+    body {
+      font-family: Arial, sans-serif;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      background: radial-gradient(circle, rgba(95,0,168,1) 20%, rgba(40,0,77,1) 80%);
+      position: relative;
+      padding: 20px;
+      overflow-x: hidden;
+    }
+
+    /* Glowing effect in background */
+    body::before {
+      content: "";
+      position: absolute;
+      width: 500px;
+      height: 500px;
+      background: rgba(255, 255, 255, 0.1);
+      filter: blur(100px);
+      border-radius: 50%;
+      top: 20%;
+      left: 10%;
+    }
+
+    body::after {
+      content: "";
+      position: absolute;
+      width: 400px;
+      height: 400px;
+      background: rgba(255, 255, 255, 0.1);
+      filter: blur(120px);
+      border-radius: 50%;
+      bottom: 15%;
+      right: 15%;
+    }
+
+    /* Title */
+    h1 {
+      color: #fff;
+      margin-bottom: 20px;
+      font-size: 28px;
+      text-shadow: 2px 2px 8px rgba(255, 255, 255, 0.2);
+    }
+
+    /* Image container */
+    .image-container {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 20px;
+        justify-content: center;
+        max-width: 90%;
+        margin: 0 auto;
+    }
+
+    /* Image wrapper (card effect) */
+    .image-wrapper {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 250px;
+        height: 250px;
+        border-radius: 12px;
+        padding: 10px;
+        background: rgba(255, 255, 255, 0.1);
+        backdrop-filter: blur(10px);
+        box-shadow: 0px 4px 15px rgba(255, 255, 255, 0.2);
+        transition: transform 0.3s ease-in-out;
+    }
+
+    .image-wrapper:hover {
+        transform: scale(1.05);
+    }
+
+    .image-wrapper img {
+        max-width: 100%;
+        max-height: 100%;
+        object-fit: contain;
+        border-radius: 8px;
+    }
+
+    /* Back to home button */
+    .back-button {
+      margin-top: 30px;
+      padding: 12px 24px;
+      font-size: 18px;
+      font-weight: bold;
+      color: white;
+      background: linear-gradient(45deg, #ffcc00, #ff9900);
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      text-decoration: none;
+      display: inline-block;
+      transition: 0.3s;
+      box-shadow: 0px 0px 8px rgba(255, 204, 0, 0.6);
+    }
+
+    .back-button:hover {
+      background: linear-gradient(45deg, #ff9900, #ffcc00);
+      box-shadow: 0px 0px 15px rgba(255, 204, 0, 1);
+    }
+
+  </style>
+</head>
+<body>
+
+  <h1>Files in {{ folder }}</h1>
+
+  <div class="image-container">
+    {% for file in files %}
+      <div class="image-wrapper">
+        <img src="/{{ folder }}/{{ file }}" alt="{{ file }}">
+      </div>
+    {% endfor %}
+  </div>
+
+  <a href="/" class="back-button">Back to Home</a>
+
+</body>
+</html>
